@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    //excercise-3.html
+</head>
+<body>
+    <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev@3.2.1/external-library.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script type="text/babel">
+
+function Loginform() {
+    return (
+        <>
+        <button onClick={() => console.log("Clicked")}>Clicked 0 Times</button>
+        </>
+
+);
+}
+function App() {
+    return(  
+    <div>
+        Hello, welcome to my website<br />
+        <Loginform />
+    </div>
+    
+        );        
+}
+
+
+const container = document.querySelector('.js-container');
+ReactDOM.createRoot(container).render(<App></App>);
+</script>
+</body>
+</html>

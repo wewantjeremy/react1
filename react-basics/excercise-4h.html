@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+        }
+        .js-container {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(222, 222, 222)
+        }
+        .button {
+            font-family: Arial;
+            background-color: rgb(25, 135, 84);
+            color: white;
+            font-size: 24px;
+            padding: 18px 24px;
+            border: none;
+            margin: 10px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev@3.2.1/external-library.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script type="text/babel">
+        function App() {
+            const [count, setCount] = React.useState(0);
+            const [isAuto, setIsAuto] = React.useState(false);
+
+            React.useEffect(() => {
+                let timer;
+                if (isAuto){
+                    timer = setInterval(() => {
+                        setCount((prev) => prev + 1);
+                    }, 1000);
+                }
+            return () => clearInterval(timer); 
+        }, [isAuto]);
+        
+            return(
+            <div>
+            <button className='button' onClick={() => setCount(count+1)}>Clicked {count} {count === 1 ? 'Time' : 'Times'}</button>
+            <button className='button' onClick={() => setCount(0)}>Reset</button>
+            <button className='button' onClick={() => setIsAuto(!isAuto)}>{isAuto ? 'Stop Auto Click' : 'Auto Click'}</button>
+            </div>
+            )
+        };
+        const container = document.querySelector('.js-container');
+ReactDOM.createRoot(container).render(<App />);
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+    <head>
+    </head>
+        <body>
+                <div class="js-container"></div>
+                <script src="https://unpkg.com/supersimpledev@3.2.1/external-library.js"></script>
+                <script src="https://unpkg.com/supersimpledev/react.js"></script>
+                <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+                <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+                <script type="text/babel">
+                    function App(){ return(
+                        <>
+                   <ProductDetails item='tennis balls' imageSrc="cotton-socks.png" price="10"/><br />
+                   <ProductDetails imageSrc="tennis-balls.png" item='t shirt' price="12"/><br />
+                   <ProductDetails imageSrc="plain-t-shirt.png" item='socks' price="8"/><br />
+                   
+                     
+                            
+                                    </>
+                                )
+                    }
+                    function ProductDetails(props){
+                        return (
+                        <>
+                        <img src={props.imageSrc} width="20" height="20"></img>
+                        {props.item}<br /><br />
+                       <del>Price: ${props.price}</del><br /><br />
+                        {props.discount ? (
+                            <>
+                        Discount price : ${props.discount}<br /><br />
+                        
+                        </>
+                        ):(
+                        <>
+                        Price: ${props.price}<br /><br />
+                        </>
+                        )}
+                        <button>Add to Cart</button> <br />
+                        </>
+                    );
+                }
+                    
+                    const container = document.querySelector('.js-container');
+ReactDOM.createRoot(container).render(<App></App>);
+        </script>
+    </body>
+    </html>

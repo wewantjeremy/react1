@@ -1,11 +1,20 @@
+import { CheckoutHeader } from './CheckoutHeader';
+import { useEffect } from 'react';
 import './CheckoutHeader.css';
 import './CheckoutPage.css';
-import { CheckoutHeader } from './CheckoutHeader';
+
 export function CheckoutPage() {
+     useEffect (() => {
+            const favicon = document.querySelector("link[rel='icon']");
+
+            if (favicon) {
+                favicon.href = '/cart-favicon.png';
+            }
+        }, []);
     return (
         <>
             <title>Checkout</title>
- 
+               <link rel="icon" type='image/png' href="/cart-favicon.png" />
             <CheckoutHeader />
             <div className="checkout-page">
                 <div className="page-title">Review your order</div>

@@ -1,7 +1,15 @@
 import { Header } from '../components/Header';
+import { useEffect } from 'react';
 import './OrdersPage.css';
 
 export function OrdersPage() {
+     useEffect (() => {
+            const favicon = document.querySelector("link[rel='icon']");
+
+            if (favicon) {
+                favicon.href = '/orders-favicon.png';
+            }
+        }, []);
     return (
         <>
         <title>Orders Page</title>

@@ -1,10 +1,17 @@
 import { Header } from '../components/Header';
+import { useEffect } from 'react';
 import './HomePage.css';
 export function HomePage() {
+     useEffect (() => {
+            const favicon = document.querySelector("link[rel='icon']");
+
+            if (favicon) {
+                favicon.href = '/home-favicon.png';
+            }
+        }, []);
     return (
         <>
             <Header />
-            
             <div className="home-page">
                 <div className="products-grid">
                     <div className="product-container">

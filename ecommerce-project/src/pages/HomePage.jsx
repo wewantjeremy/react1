@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { Header } from '../components/Header';
-import { products } from '../../starting-code/data/products';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
 import './HomePage.css';
-export function HomePage() {
+export function HomePage({ cart }) {
     useEffect(() => {
         const favicon = document.querySelector("link[rel='icon']");
 
@@ -14,16 +13,12 @@ export function HomePage() {
         }
     }, []);
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState();
+
     useEffect(() => {
         axios.get('/api/products')
             .then((response) => {
                 setProducts(response.data);
-            });
-        axios.get('/api/cart-items')
-            .then((response) => {
-                setCart(response.data);
-            })    
+            }); 
         }, []);
 
     return (

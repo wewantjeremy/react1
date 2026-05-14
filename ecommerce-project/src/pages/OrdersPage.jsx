@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { TrackPackage } from './Tracking';
 import './OrdersPage.css';
 
-export function OrdersPage() {
+export function OrdersPage( { cart } ) {
      useEffect (() => {
             const favicon = document.querySelector("link[rel='icon']");
 
@@ -14,7 +14,7 @@ export function OrdersPage() {
     return (
         <>
         <title>Orders Page</title>
-            <Header />
+            <Header cart={cart}/>
 
             <div className="orders-page">
                 <div className="page-title">Your Orders</div>

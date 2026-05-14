@@ -5,9 +5,9 @@ import { useEffect } from 'react';
 
 export function TrackPackage() {
   return (
-    <div classNameName="product-actions">
+    <div className="product-actions">
       <NavLink to="/tracking">
-        <button classNameName="track-package-button button-secondary">
+        <button className="track-package-button button-secondary">
           Track package
         </button>
       </NavLink>
@@ -28,7 +28,7 @@ export function Tracking() {
       <Header />
       <div className="header">
         <div className="left-section">
-          <NavLink href="/" className="header-link">
+          <NavLink to="/" className="header-link">
             <img className="logo"
               src="images/logo-white.png" />
             <img className="mobile-logo"

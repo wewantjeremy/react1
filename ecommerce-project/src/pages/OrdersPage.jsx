@@ -1,5 +1,6 @@
 import { Header } from '../components/Header';
 import { useEffect } from 'react';
+import { TrackPackage } from './Tracking';
 import './OrdersPage.css';
 
 export function OrdersPage() {
@@ -60,13 +61,7 @@ export function OrdersPage() {
                                 </button>
                             </div>
 
-                            <div className="product-actions">
-                                <a href="/tracking">
-                                    <button className="track-package-button button-secondary">
-                                        Track package
-                                    </button>
-                                </a>
-                            </div>
+                            <TrackPackage />
 
                             <div className="product-image-container">
                                 <img src="images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg" />
@@ -88,13 +83,7 @@ export function OrdersPage() {
                                 </button>
                             </div>
 
-                            <div className="product-actions">
-                                <a href="/tracking">
-                                    <button className="track-package-button button-secondary">
-                                        Track package
-                                    </button>
-                                </a>
-                            </div>
+                            <TrackPackage />
                         </div>
                     </div>
 
@@ -139,13 +128,7 @@ export function OrdersPage() {
                                 </button>
                             </div>
 
-                            <div className="product-actions">
-                                <a href="/tracking">
-                                    <button className="track-package-button button-secondary">
-                                        Track package
-                                    </button>
-                                </a>
-                            </div>
+                            <TrackPackage />
                         </div>
                     </div>
                 </div>

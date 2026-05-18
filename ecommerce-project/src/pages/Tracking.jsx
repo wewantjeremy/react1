@@ -25,7 +25,6 @@ export function Tracking() {
   return (
     <>
       <title>Tracking Page</title>
-      <Header />
       <div className="header">
         <div className="left-section">
           <NavLink to="/" className="header-link">
@@ -45,12 +44,12 @@ export function Tracking() {
         </div>
 
         <div className="right-section">
-          <NavLink className="orders-link header-link" href="/orders">
+          <NavLink className="orders-link header-link" to="/orders">
 
             <span className="orders-text">Orders</span>
           </NavLink>
 
-          <NavLink className="cart-link header-link" href="/checkout">
+          <NavLink className="cart-link header-link" to="/checkout">
             <img className="cart-icon" src="images/icons/cart-icon.png" />
             <div className="cart-quantity">3</div>
             <div className="cart-text">Cart</div>
@@ -60,7 +59,7 @@ export function Tracking() {
 
       <div className="tracking-page">
         <div className="order-tracking">
-          <NavLink className="back-to-orders-link link-primary" href="/orders">
+          <NavLink className="back-to-orders-link link-primary" to="/orders">
             View all orders
           </NavLink>
 

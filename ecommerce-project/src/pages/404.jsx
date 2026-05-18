@@ -1,12 +1,12 @@
 import { Header } from '../components/Header.jsx';
 
-    export function NotFound() {
+    export function NotFound({ cart }) {
     return (
     <>
     <title>
         404 Not Found
     </title>
-    <Header />
+     <Header cart={cart} />
     <br />
     <br />
     <br />

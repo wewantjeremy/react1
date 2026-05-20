@@ -17,10 +17,11 @@ export function CheckoutPage({ cart, setCart }) {
     const [deliveryOptions, setDeliveryOptions] = useState([]);
 
 useEffect(() => {
-    axios.get('/api/delivery-options?expand=estimatedDeliveryTime')
-        .then((response) => {
+    const fetchCheckoutData = async () => {
+    const response = await axios.get('/api/delivery-options?expand=estimatedDeliveryTime')
             setDeliveryOptions(response.data);
-        });
+    };
+    fetchCheckoutData();
 }, []);
     return (
         <>

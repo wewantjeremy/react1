@@ -6,7 +6,7 @@ import axios from 'axios';
 import dayjs from 'dayjs'
 import './OrdersPage.css';
 
-export function OrdersPage({ cart }) {
+export function OrdersPage({ cart, loadCart }) {
     useEffect(() => {
         const favicon = document.querySelector("link[rel='icon']");
 
@@ -34,7 +34,7 @@ export function OrdersPage({ cart }) {
                 return (
                     <div key={order.id} className="order-container">
                         <OrderHeader order={order}/>
-                        <OrdersGrid order={order} />
+                        <OrdersGrid order={order} loadCart={loadCart} />
                         </div>
                 );
             })}

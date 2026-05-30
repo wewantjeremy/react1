@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import './CheckoutHeader.css';
 import './CheckoutPage.css';
 
-export function CheckoutPage({ cart, setCart }) {
+export function CheckoutPage({ cart, setCart, loadCart }) {
 
     useEffect(() => {
         const favicon = document.querySelector("link[rel='icon']");
@@ -29,12 +29,12 @@ useEffect(() => {
         <>
             <title>Checkout</title>
             <link rel="icon" type='image/png' href="/cart-favicon.png" />
-            <CheckoutHeader />
+            <CheckoutHeader cart={cart}/>
             <div className="checkout-page">
                 <div className="page-title">Review your order</div>
                 <div className="checkout-grid">
                     <OrderSummary cart={cart} setCart={setCart} deliveryOptions={deliveryOptions} />
-                    <PaymentSummary cart={cart}/>
+                    <PaymentSummary cart={cart} loadCart={loadCart}/>
                 </div >
             </div >
         </>

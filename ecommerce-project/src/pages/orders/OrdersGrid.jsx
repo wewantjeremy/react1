@@ -1,8 +1,9 @@
 import { Fragment } from 'react';
 import dayjs from 'dayjs';
 import { TrackPackage } from '../Tracking'
+import {addToCart} from '../../utils/cart'
 
-export function OrdersGrid({ order }) {
+export function OrdersGrid({ order, loadCart }) {
   return (
     <div className="order-details-grid">
       {order.products.map((orderProduct) => {
@@ -22,6 +23,14 @@ export function OrdersGrid({ order }) {
               <div className="product-quantity">
                 Quantity: {orderProduct.quantity}
               </div>
+              <button className="buy-again-button"
+                onClick={() => {
+                  addToCart(orderProduct.product.id, 1, loadCart)
+                  }}>
+                    <img className="buy-again-icon"
+                    src="images/icons/buy-again.png" />
+                Buy Again
+            </button>
             </div>
             <TrackPackage
               orderId={order.id}

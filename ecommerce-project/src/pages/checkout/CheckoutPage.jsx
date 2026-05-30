@@ -7,6 +7,7 @@ import './CheckoutHeader.css';
 import './CheckoutPage.css';
 
 export function CheckoutPage({ cart, setCart }) {
+
     useEffect(() => {
         const favicon = document.querySelector("link[rel='icon']");
 
@@ -15,7 +16,8 @@ export function CheckoutPage({ cart, setCart }) {
         }
     }, []);
     const [deliveryOptions, setDeliveryOptions] = useState([]);
-
+    console.log(cart);
+console.log(deliveryOptions);
 useEffect(() => {
     const fetchCheckoutData = async () => {
     const response = await axios.get('/api/delivery-options?expand=estimatedDeliveryTime')
@@ -32,9 +34,10 @@ useEffect(() => {
                 <div className="page-title">Review your order</div>
                 <div className="checkout-grid">
                     <OrderSummary cart={cart} setCart={setCart} deliveryOptions={deliveryOptions} />
-                    <PaymentSummary />
+                    <PaymentSummary cart={cart}/>
                 </div >
             </div >
         </>
+        
     );
 }

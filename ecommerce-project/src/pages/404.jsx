@@ -1,6 +1,9 @@
 import { Header } from '../components/Header.jsx';
-
+import { useEffect } from 'react';
     export function NotFound({ cart }) {
+        useEffect(() => {
+            console.log('404');
+        }, []);
     return (
     <>
     <title>

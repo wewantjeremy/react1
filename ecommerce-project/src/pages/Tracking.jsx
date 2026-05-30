@@ -1,12 +1,16 @@
 import { Header } from '../components/Header';
 import { NavLink } from 'react-router';
 import './Tracking.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import axios from 'axios';
+import dayjs from 'dayjs';
 
-export function TrackPackage() {
+export function TrackPackage({ orderId, productId }) {
+
   return (
     <div className="product-actions">
-      <NavLink to="/tracking">
+      <NavLink to={`/tracking/${orderId}/${productId}`}>
         <button className="track-package-button button-secondary">
           Track package
         </button>
@@ -14,7 +18,12 @@ export function TrackPackage() {
     </div>)
 };
 
+
+
 export function Tracking() {
+  const { orderId, productId } = useParams();
+  const [product, setProduct] = useState(null);
+  const [order, setOrder] = useState(null);
   useEffect(() => {
     const favicon = document.querySelector("link[rel='icon']");
 
@@ -22,6 +31,49 @@ export function Tracking() {
       favicon.href = '../tracking-favicon.png';
     }
   }, []);
+
+
+  useEffect(() => {
+    const loadTrackingData = async () => {
+      const response = await axios.get('/api/orders?expand=products');
+
+      const order = response.data.find(
+        (order) => order.id === orderId
+      );
+
+      const orderProduct = order?.products.find(
+        (product) => product.product.id === productId
+      );
+      setOrder(order);
+      setProduct(orderProduct);
+    };
+
+    loadTrackingData();
+  }, [orderId, productId]);
+
+  if (!order || !product) {
+    return <div>Loading...</div>;
+  }
+  const totalDeliveryTimeMs =
+    product.estimatedDeliveryTimeMs - order.orderTimeMs;
+
+  const timePassedMs =
+    dayjs().valueOf() - order.orderTimeMs;
+
+  let deliveryPercent =
+    (timePassedMs / totalDeliveryTimeMs) * 100;
+
+  if (deliveryPercent > 100) {
+    deliveryPercent = 100;
+  }
+  const isPreparing = deliveryPercent < 33;
+
+  const isShipped =
+    deliveryPercent >= 33 &&
+    deliveryPercent < 100;
+
+  const isDelivered =
+    deliveryPercent === 100;
   return (
     <>
       <title>Tracking Page</title>
@@ -64,33 +116,35 @@ export function Tracking() {
           </NavLink>
 
           <div className="delivery-date">
-            Arriving on Monday, June 13
+            Arriving on {dayjs(product.estimatedDeliveryTimeMs).format('MMMM D')}
           </div>
 
           <div className="product-info">
-            Black and Gray Athletic Cotton Socks - 6 Pairs
+            {product.product.name}
           </div>
 
           <div className="product-info">
-            Quantity: 1
+            Quantity: {product.quantity}
           </div>
 
-          <img className="product-image" src="images/products/athletic-cotton-socks-6-pairs.jpg" />
-
+          <img className="product-image" src={product.product.image} />
           <div className="progress-labels-container">
-            <div className="progress-label">
+            <div className={`progress-label ${isPreparing ? 'current-status': ''}`}>
               Preparing
             </div>
-            <div className="progress-label current-status">
-              Shipped
+            <div className={`progress-label ${isShipped ? 'current-status': ''}`}>
+              Shipped on {dayjs(order.orderTimeMs).format('MMMM D')}
             </div>
-            <div className="progress-label">
-              Delivered
+            <div className={`progress-label ${isDelivered ? 'current-status': ''}`}>
+              Delivered on {dayjs(product.estimatedDeliveryTimeMs).format('MMMM D')}
             </div>
           </div>
 
           <div className="progress-bar-container">
-            <div className="progress-bar"></div>
+            <div
+              className="progress-bar"
+              style={{ width: `${deliveryPercent}%` }}
+            ></div>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { CartItemDetails } from './CartItemDetails';
 import { DeliveryDate } from './DeliveryDate';
 
-export function OrderSummary({ cart, deliveryOptions, setCart }) {
+export function OrderSummary({ cart, deliveryOptions, setCart, loadCart }) {
     return (
        
             <div className="order-summary">

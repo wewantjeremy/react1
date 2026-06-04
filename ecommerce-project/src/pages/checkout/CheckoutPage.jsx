@@ -7,37 +7,41 @@ import './CheckoutHeader.css';
 import './CheckoutPage.css';
 
 export function CheckoutPage({ cart, setCart, loadCart }) {
+    const [deliveryOptions, setDeliveryOptions] = useState([]);
+    const [paymentSummary, setPaymentSummary] = useState(null);
 
     useEffect(() => {
         const favicon = document.querySelector("link[rel='icon']");
-
         if (favicon) {
             favicon.href = '/cart-favicon.png';
         }
     }, []);
-    const [deliveryOptions, setDeliveryOptions] = useState([]);
-    console.log(cart);
-console.log(deliveryOptions);
-useEffect(() => {
-    const fetchCheckoutData = async () => {
-    const response = await axios.get('/api/delivery-options?expand=estimatedDeliveryTime')
+    useEffect(() => {
+        const fetchCheckoutData = async () => {
+            const response = await axios.get('/api/delivery-options?expand=estimatedDeliveryTime')
             setDeliveryOptions(response.data);
-    };
-    fetchCheckoutData();
-}, []);
+        };
+        fetchCheckoutData();
+    }, []);
+    useEffect(() => {
+    const fetchPaymentSummary = async () => {
+        const response = await axios.get('/api/payment-summary')
+    }
+    fetchPaymentSummary()
+  }, [cart])
     return (
         <>
             <title>Checkout</title>
             <link rel="icon" type='image/png' href="/cart-favicon.png" />
-            <CheckoutHeader cart={cart}/>
+            <CheckoutHeader cart={cart} />
             <div className="checkout-page">
-                <div className="page-title">Review your order</div>
+                <div className="page-title"> {cart.length === 0 ? "Your Cart Is Empty" : "Review your order"}</div>
                 <div className="checkout-grid">
-                    <OrderSummary cart={cart} setCart={setCart} deliveryOptions={deliveryOptions} />
-                    <PaymentSummary cart={cart} loadCart={loadCart}/>
+                    <OrderSummary cart={cart} setCart={setCart} deliveryOptions={deliveryOptions} loadCart={loadCart}/>
+                    <PaymentSummary cart={cart} loadCart={loadCart} />
                 </div >
             </div >
         </>
-        
+
     );
 }

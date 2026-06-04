@@ -17,6 +17,7 @@ export function OrderSummary({ cart, deliveryOptions, setCart, loadCart }) {
                     setCart={setCart} 
                     cartItem={cartItem}
                     deliveryOptions={deliveryOptions}
+                    loadCart={loadCart}
                   />
                   </div>
             );

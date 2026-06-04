@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { formatMoney } from '../../utils/money'
-import {addToCart} from '../../utils/cart'
+import { addToCart } from '../../utils/cart'
 
 export function Product({ product, loadCart }) {
     const [quantity, setQuantity] = useState(1);
-
+    const [added, setAdded] = useState(false);
 
     const selectQuantity = (event) => {
         const quantitySelected = Number(event.target.value);
@@ -52,14 +52,23 @@ export function Product({ product, loadCart }) {
             <div className="product-spacer"></div>
 
             <div className="added-to-cart">
-                <img src="images/icons/checkmark.png" />
-                Added
+                {added && (
+                    <>
+                        <img src="images/icons/checkmark.png" />
+                        Added
+                    </>
+                )}
             </div>
-
-            <button className="add-to-cart-button button-primary"
-onClick={() => {
-    addToCart(product.id, quantity, loadCart)
-}}>
+   
+                <button
+                    className="add-to-cart-button button-primary"
+                    onClick={() => {
+                        addToCart(product.id, quantity, loadCart)
+                        setAdded(true)
+                        setTimeout(() => {
+                            setAdded(false)
+                        }, 2000)
+                    }}>
                 Add to Cart
             </button>
         </div>
